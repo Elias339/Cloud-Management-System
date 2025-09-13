@@ -56,7 +56,9 @@ php artisan serve
 Frontend will be available at: http://localhost:5173
 
 Default Login Credentials
+
 Email: admin@gmail.com
+
 Password: password
 
 
@@ -66,25 +68,34 @@ Password: password
 # Login
 URL: POST /api/login
 Body:
+```bash
 {
   "email": "admin@gmail.com",
   "password": "password"
 }
+```
 
 # Logout
+
 URL: POST /api/logout
+
 Headers: Authorization: Bearer {token}
 
 ## Server Endpoints
 
 # List Servers
+
 URL: GET /api/servers
+
 Query Parameters: page, per_page, sort, order, q, provider, status, min_cpu, max_cpu
 
 # Create Server
 URL: POST /api/servers
+
 Headers: Authorization: Bearer {token}
+
 Body:
+```bash
 {
   "name": "Server Name",
   "ip_address": "192.168.1.1",
@@ -94,37 +105,56 @@ Body:
   "ram_mb": 8192,
   "storage_gb": 100
 }
+```
 
 # Get Server Details
+
 URL: GET /api/servers/{id}
+
 Headers: Authorization: Bearer {token}
 
 # Update Server
+
 URL: PUT /api/servers/{id}
+
 Headers: Authorization: Bearer {token}
+
 Body: Same as create plus optional version field for optimistic concurrency
 
 # Delete Server
+
 URL: DELETE /api/servers/{id}
+
 Headers: Authorization: Bearer {token}
 
 # Bulk Delete
+
 URL: POST /api/servers/bulk-delete
+
 Headers: Authorization: Bearer {token}
+
 Body:
+```bash
 {
   "ids": [1, 2, 3]
 }
+```
 
 ## 📱 UI Overview
- Login Page: Clean authentication interface with form validation.
+ Login Page: Clean authentication interface with form validation
+
  Server List: 
          - Table view with pagination, sorting, and filtering
+
          - Bulk selection and deletion capabilities
+
          - Responsive design for mobile
+
          - Real-time search with debouncing
- Server Details: Comprehensive view of server specifications with visual hardware representation.
- Create/Edit Forms: Intuitive layout, validation, and optimistic concurrency control.
+
+ Server Details: Comprehensive view of server specifications with visual hardware representation
+
+ Create/Edit Forms: Intuitive layout, validation, and optimistic concurrency control
 
 ## 🤖 AI Collaboration Process
 
