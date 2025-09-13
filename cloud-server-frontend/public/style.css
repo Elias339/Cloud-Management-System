@@ -1,0 +1,75 @@
+
+/* Header */
+.header-bg {
+  background-color: #ffffff;
+  transition: all 0.3s ease;
+  border-radius: 8px;
+}
+
+.nav-link {
+  position: relative;
+  font-weight: 500;
+  margin-right: 10px;
+  transition: all 0.2s ease;
+}
+
+.nav-link:hover {
+  color: #0d6efd;
+  transform: translateY(-2px);
+}
+
+.active-link {
+  color: #0d6efd !important;
+} 
+
+.logo {
+  font-size: 1.4rem;
+  color: #0d6efd;
+}
+
+.logo i {
+  font-size: 1.5rem;
+}
+
+@media (max-width: 992px) {
+  .nav-link {
+    margin-right: 0;
+    margin-bottom: 0.5rem;
+  }
+}
+
+/* server show */
+.fade-in {
+  animation: fadeIn 0.6s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.server-status-active { 
+  color: #28a745 !important;
+}
+
+.server-status-inactive { 
+  color: #dc3545 !important;
+}
+
+.server-status-maintenance { 
+  color: #0d6efd !important;
+}
+
+.stats-card {
+  transition: transform 0.3s ease;
+  border-radius: 12px;
+}
+.stats-card:hover {
+  transform: translateY(-5px);
+}
