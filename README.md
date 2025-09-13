@@ -67,6 +67,7 @@ Password: password
 
 # Login
 URL: POST /api/login
+
 Body:
 ```bash
 {
