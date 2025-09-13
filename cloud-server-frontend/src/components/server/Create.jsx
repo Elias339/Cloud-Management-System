@@ -40,8 +40,8 @@ const Create = () => {
     } else {
       setValue(field, val);
     }
-  };
-
+  }; 
+  
   const onSubmit = async (data) => {
     setLoading(true);
     try {
@@ -120,17 +120,17 @@ const Create = () => {
 
                 <div className="col-md-2 mb-3">
                   <label className="form-label">CPU</label>
-                  <input type="number" {...register('cpu_cores')} className="form-control" value={cpu} onChange={handleNumberChange('cpu_cores', 1)} min={1} />
+                  <input type="number" {...register('cpu_cores')} className="form-control" value={cpu} onChange={handleNumberChange('cpu_cores', "")} min={1} />
                 </div>
 
                 <div className="col-md-2 mb-3">
                   <label className="form-label">RAM (MB)</label>
-                  <input type="number" {...register('ram_mb')} className="form-control" value={ram} onChange={handleNumberChange('ram_mb', 512)} min={512} />
+                  <input type="number" {...register('ram_mb')} className="form-control" value={ram} onChange={handleNumberChange('ram_mb', "")} min={512} /> 
                 </div>
 
                 <div className="col-md-2 mb-3">
                   <label className="form-label">Storage (GB)</label>
-                  <input type="number" {...register('storage_gb')} className="form-control" value={storage} onChange={handleNumberChange('storage_gb', 10)} min={10} />
+                  <input type="number" {...register('storage_gb')} className="form-control" value={storage} onChange={handleNumberChange('storage_gb', "")} min={10} />
                 </div>
               </div>
 
