@@ -43,6 +43,15 @@ const Index = () => {
   const [meta, setMeta] = useState({});
  
   const [selected, setSelected] = useState([]);
+  const [searchTerm, setSearchTerm] = useState(filters.q);
+
+  useEffect(() => {
+    const handler = setTimeout(() => {
+      setFilters(prev => ({ ...prev, q: searchTerm }));
+      setPage(1);
+    }, 500);
+    return () => clearTimeout(handler);  
+  }, [searchTerm]);
 
   useEffect(() => {
     fetchServers();  
@@ -187,8 +196,8 @@ const Index = () => {
           <div className="collapse" id="filterCollapse">
             <div className="card-body">
               <div className="row g-3">
-                <div className="col-md-3">
-                  <input type="text" name="q" className="form-control" value={filters.q} onChange={handleFilterChange} placeholder="Search name or IP" />
+                <div className="col-md-3"> 
+                  <input type="text" name="q" className="form-control" value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)}  placeholder="Search name or IP" />
                 </div>
 
                 <div className="col-md-2">
