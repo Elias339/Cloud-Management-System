@@ -73,8 +73,10 @@ const Index = () => {
   };
 
   const handleFilterChange = (e) => {
-    const { name, value } = e.target; 
-    if (["min_cpu", "max_cpu"].includes(name) && value < 0) return;
+    const { name, value } = e.target;  
+    if (["min_cpu", "max_cpu"].includes(name)) { 
+      if (value !== "" && Number(value) < 1) return;
+     }
     setFilters((prev) => ({ ...prev, [name]: value }));
     setPage(1);
   };
@@ -182,7 +184,7 @@ const Index = () => {
             </button>
           </div>
 
-          <div className="collapse show" id="filterCollapse">
+          <div className="collapse" id="filterCollapse">
             <div className="card-body">
               <div className="row g-3">
                 <div className="col-md-3">
@@ -194,7 +196,7 @@ const Index = () => {
                     <option value="">All providers</option>
                     {providers.map((p) => (
                       <option key={p} value={p}>
-                        {p}
+                        {p.toUpperCase()}
                       </option>
                     ))}
                   </select>
@@ -205,23 +207,22 @@ const Index = () => {
                     <option value="">All statuses</option>
                     {statuses.map((s) => (
                       <option key={s} value={s}>
-                        {s}
+                        {capitalize(s)}
                       </option>
                     ))}
                   </select>
                 </div>
 
                 <div className="col-md-2">
-                  <input type="number" name="min_cpu" value={filters.min_cpu} onChange={handleFilterChange} min="0" className="form-control" placeholder="Min CPU" />
+                  <input type="number" name="min_cpu" value={filters.min_cpu} onChange={handleFilterChange} min="1" className="form-control" placeholder="Min CPU" />
                 </div>
 
                 <div className="col-md-2">
-                  <input type="number" name="max_cpu" value={filters.max_cpu} onChange={handleFilterChange} min="0" className="form-control" placeholder="Max CPU" />
+                  <input type="number" name="max_cpu" value={filters.max_cpu} onChange={handleFilterChange} min="1" className="form-control" placeholder="Max CPU" />
                 </div>
 
                 <div className="col-md-3 d-flex gap-2">
-                  <button className="btn btn-secondary" onClick={resetFilters}> Reset </button>
-                  <button className="btn btn-primary" onClick={fetchServers}> Apply </button>
+                  <button className="btn btn-secondary" onClick={resetFilters}> Reset </button> 
                 </div>
               </div>
             </div>
