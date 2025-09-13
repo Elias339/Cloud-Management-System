@@ -51,12 +51,14 @@ cp .env.example .env
 php artisan key:generate
 php artisan migrate --seed
 php artisan serve
+```
 
 Frontend will be available at: http://localhost:5173
 
 Default Login Credentials
 Email: admin@gmail.com
 Password: password
+
 
 🔌 API Documentation
 ## Authentication Endpoints
@@ -114,17 +116,17 @@ Body:
   "ids": [1, 2, 3]
 }
 
-📱 UI Overview
-# Login Page: Clean authentication interface with form validation.
-# Server List: 
+## 📱 UI Overview
+ Login Page: Clean authentication interface with form validation.
+ Server List: 
          - Table view with pagination, sorting, and filtering
          - Bulk selection and deletion capabilities
          - Responsive design for mobile
          - Real-time search with debouncing
-# Server Details: Comprehensive view of server specifications with visual hardware representation.
-# Create/Edit Forms: Intuitive layout, validation, and optimistic concurrency control.
+ Server Details: Comprehensive view of server specifications with visual hardware representation.
+ Create/Edit Forms: Intuitive layout, validation, and optimistic concurrency control.
 
-🤖 AI Collaboration Process
+## 🤖 AI Collaboration Process
 
 Initial Scaffolding: AI assisted with project structure and technology selection
 
@@ -138,7 +140,7 @@ Bug Resolution: AI helped diagnose and fix issues
 
 Documentation: AI assisted in creating this comprehensive README
 
-🐛 Debugging Journey
+## 🐛 Debugging Journey
 
 CORS Configuration: Fixed frontend API access by configuring Laravel CORS middleware
 
@@ -150,7 +152,7 @@ Bulk Delete Implementation: Used database transactions for atomic operations
 
 Responsive Table Design: Horizontal scrolling and Bootstrap utilities to fix overflow
 
-⚖️ Tech Decisions & Trade-offs
+## ⚖️ Tech Decisions & Trade-offs
 
 Laravel Sanctum - Lightweight token-based auth, trade-off: fewer features than Passport
 
@@ -162,7 +164,7 @@ Client-side Filtering & Pagination - Faster UX, trade-off: limited to loaded dat
 
 Optimistic Concurrency Control - Prevents accidental overwrite, trade-off: adds complexity
 
-⏱️ Time Spent
+## ⏱️ Time Spent
 | Task                          | Hours  |
 | ----------------------------- | ------ |
 | Project Setup & Configuration | 4      |
