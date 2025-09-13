@@ -264,6 +264,13 @@ const Index = () => {
                     <SkeletonRow />
                     <SkeletonRow />
                     <SkeletonRow />
+                    <SkeletonRow />
+                    <SkeletonRow />
+                    <SkeletonRow />
+                    <SkeletonRow />
+                    <SkeletonRow />
+                    <SkeletonRow />
+                    <SkeletonRow />
                   </>
                 ) : servers.length ? (
                   servers.map((s) => (
