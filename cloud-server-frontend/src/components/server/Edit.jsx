@@ -60,17 +60,22 @@ const Edit = () => {
       setValue(field, val);
     }
   };
-
+ 
   const onSubmit = async (formData) => {
     try {
-      await api.put(`/servers/${id}`, formData);
-      toast.success('Server updated successfully!');
-      navigate('/servers');
-    } catch (err) {
-      if (err.response?.status === 409 && err.response?.data?.error === 'version_mismatch') {
-        toast.error('Version mismatch. Refresh and try again.');
+      const res = await api.put(`/servers/${id}`, formData); 
+      if (res.data?.message) {
+        toast.success(res.data.message);
       } else {
-        toast.error(err.response?.data?.message || err.message);
+        toast.success('Server update successfully!');
+      }
+      navigate('/servers');
+    } catch (err) { 
+      const errorMessage = err.response?.data?.message || err.message || 'Something went wrong';
+      if (err.response?.status === 409 && err.response?.data?.error === 'version_mismatch') {
+        toast.error(errorMessage);  
+      } else {
+        toast.error(errorMessage);
       }
     }
   };

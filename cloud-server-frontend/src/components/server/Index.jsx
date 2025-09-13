@@ -4,6 +4,7 @@ import api from "../../api";
 import { toast } from "react-toastify";
 import Header from "../common/header";
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
+import Swal from "sweetalert2";
 
 const providers = ["aws", "digitalocean", "vultr", "other"];
 const statuses = ["active", "inactive", "maintenance"];
@@ -105,27 +106,52 @@ const Index = () => {
   };
 
   const handleDelete = async (id) => {
-    if (!window.confirm("Delete this server?")) return;
-    try {
-      await api.delete(`/servers/${id}`);
-      toast.success("Deleted");
-      fetchServers();
-    } catch (err) {
-      toast.error(err.response?.data?.message || err.message || "Delete failed");
-    }
+    Swal.fire({
+      title: "Are you sure?", 
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#d33",
+      cancelButtonColor: "#3085d6",
+      confirmButtonText: "Yes, delete it!",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        try {
+          const res = await api.delete(`/servers/${id}`); 
+          toast.success(res.data?.message || "Deleted successfully");
+          fetchServers();  
+        } catch (err) {
+          toast.error(err.response?.data?.message || err.message || "Delete failed");
+        }
+      }
+    });
   };
 
   const handleBulkDelete = async () => {
-    if (!window.confirm(`Delete ${selected.length} server(s)?`)) return;
-    try {
-      await Promise.all(selected.map((id) => api.delete(`/servers/${id}`)));
-      toast.success("Deleted selected servers");
-      setSelected([]);
-      fetchServers();
-    } catch {
-      toast.error("Bulk delete failed");
+    if (selected.length === 0) {
+      toast.warning("Please select at least one server");
+      return;
     }
-  
+
+    Swal.fire({
+      title: "Are you sure?",
+      text: `Delete ${selected.length} server${selected.length > 1 ? 's' : ''}?`,
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "rgba(235, 19, 19, 1)",
+      cancelButtonColor: "#3085d6",
+      confirmButtonText: "Yes, delete them!",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        try {   
+          const res = await api.post('/servers/bulk-delete', { ids: selected }); 
+          toast.success(res.data?.message || `Deleted ${res.data?.deleted_count} server${selected.length > 1 ? 's' : ''}`);
+          setSelected([]);
+          fetchServers();
+        } catch (err) {
+          toast.error(err.response?.data?.message || err.message || "Bulk delete failed");
+        }
+      }
+    });
   };
 
   const toggleSelectAll = () => {
@@ -165,7 +191,6 @@ const Index = () => {
 
     return rangeWithDots;
   };
-
 
   return (
     <>
@@ -240,7 +265,7 @@ const Index = () => {
  
         {selected.length > 0 && (
           <div className="alert alert-info d-flex justify-content-between">
-            <span>{selected.length} server(s) selected</span>
+            <span>{selected.length} server{selected.length > 1 ? 's' : ''} selected</span>
             <button className="btn btn-danger btn-sm" onClick={handleBulkDelete} > Delete Selected </button>
           </div>
         )}
@@ -250,7 +275,7 @@ const Index = () => {
           <div className="table-responsive">
             <table className="table table-hover mb-0">
               <thead className="table-light">
-                <tr>
+                <tr className="text-center">
                   <th>
                     <input type="checkbox" className="form-check-input" checked={selected.length === servers.length && servers.length > 0} onChange={toggleSelectAll} />
                   </th>
@@ -263,8 +288,8 @@ const Index = () => {
                   <th onClick={() => changeSort("cpu_cores")} style={{cursor:"pointer"}}>
                     CPU {sort === "cpu_cores" ? (order === "asc" ? "▲" : "▼") : ""}
                   </th>
-                  <th>RAM</th>
-                  <th>Storage</th>
+                  <th>RAM (MB)</th>
+                  <th>Storage (GB)</th>
                   <th>Actions</th>
                 </tr>
               </thead>
@@ -284,7 +309,7 @@ const Index = () => {
                   </>
                 ) : servers.length ? (
                   servers.map((s) => (
-                    <tr key={s.id}>
+                    <tr key={s.id} className="text-center">
                       <td>
                         <input type="checkbox" className="form-check-input" checked={selected.includes(s.id)} onChange={() => toggleSelect(s.id)} />
                       </td>

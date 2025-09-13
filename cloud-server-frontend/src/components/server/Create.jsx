@@ -41,12 +41,25 @@ const Create = () => {
       setValue(field, val);
     }
   }; 
-  
+
+  // const onSubmit = async (data) => {
+  //   setLoading(true);
+  //   try {
+  //     await api.post('/servers', data);
+  //     toast.success('Server created successfully!');
+  //     navigate('/servers');
+  //   } catch (err) {
+  //     toast.error(err.response?.data?.message || err.message);
+  //   } finally {
+  //     setLoading(false);
+  //   }
+  // };
+
   const onSubmit = async (data) => {
     setLoading(true);
     try {
-      await api.post('/servers', data);
-      toast.success('Server created successfully!');
+      const res = await api.post('/servers', data);
+      toast.success(res.data?.message || 'Server  successfully!');
       navigate('/servers');
     } catch (err) {
       toast.error(err.response?.data?.message || err.message);
@@ -54,6 +67,7 @@ const Create = () => {
       setLoading(false);
     }
   };
+
  
   if (loading)
     return (
