@@ -93,6 +93,7 @@ const Index = () => {
 
   const resetFilters = () => {
     setFilters({ q: "", provider: "", status: "", min_cpu: "", max_cpu: "" });
+    setSearchTerm("");
     setPage(1);
   };
 

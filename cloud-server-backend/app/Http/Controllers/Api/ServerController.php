@@ -9,7 +9,7 @@ use App\Models\Server;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Database\QueryException; 
+use Illuminate\Database\QueryException;
 
 class ServerController extends Controller {
 

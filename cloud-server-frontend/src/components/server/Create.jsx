@@ -42,19 +42,6 @@ const Create = () => {
     }
   }; 
 
-  // const onSubmit = async (data) => {
-  //   setLoading(true);
-  //   try {
-  //     await api.post('/servers', data);
-  //     toast.success('Server created successfully!');
-  //     navigate('/servers');
-  //   } catch (err) {
-  //     toast.error(err.response?.data?.message || err.message);
-  //   } finally {
-  //     setLoading(false);
-  //   }
-  // };
-
   const onSubmit = async (data) => {
     setLoading(true);
     try {
@@ -68,7 +55,6 @@ const Create = () => {
     }
   };
 
- 
   if (loading)
     return (
       <>
